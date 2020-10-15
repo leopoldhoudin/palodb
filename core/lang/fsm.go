@@ -28,11 +28,11 @@ const (
 
 var FSM = map[State]([]Transition){
   STATE_STMT_START: []Transition{
-    {STATE_CREATE_START, TOKEN_KW_CREATE, dummy},
+    {STATE_CREATE_START, TOKEN_KW_CREATE, passthrough},
   },
 
   STATE_CREATE_START: []Transition{
-    {STATE_CREATE_DIM_START, TOKEN_KW_DIMENSION, dummy},
+    {STATE_CREATE_DIM_START, TOKEN_KW_DIMENSION, passthrough},
   },
 
   STATE_CREATE_DIM_START: []Transition{
@@ -40,7 +40,7 @@ var FSM = map[State]([]Transition){
   },
 
   STATE_CREATE_DIM_IDENTIFIER: []Transition{
-    {STATE_LEVELS_START, TOKEN_PAR_OPEN, dummy},
+    {STATE_LEVELS_START, TOKEN_PAR_OPEN, passthrough},
   },
 
   STATE_LEVELS_START: []Transition{
@@ -48,7 +48,7 @@ var FSM = map[State]([]Transition){
   },
 
   STATE_LEVEL_IDENTIFIER: []Transition{
-    {STATE_ATTRIBUTES_START, TOKEN_PAR_OPEN, dummy},
+    {STATE_ATTRIBUTES_START, TOKEN_PAR_OPEN, passthrough},
   },
 
   STATE_ATTRIBUTES_START: []Transition{
@@ -62,12 +62,12 @@ var FSM = map[State]([]Transition){
 
   STATE_ATTRIBUTE_TYPE: []Transition{
     {STATE_ATTRIBUTE_DEFAULT, TOKEN_KW_DEFAULT, createAttributeSetDefault},
-    {STATE_ATTRIBUTES_NEXT, TOKEN_COMA, dummy},
-    {STATE_ATTRIBUTES_END, TOKEN_PAR_CLOSE, dummy},
+    {STATE_ATTRIBUTES_NEXT, TOKEN_COMA, passthrough},
+    {STATE_ATTRIBUTES_END, TOKEN_PAR_CLOSE, passthrough},
   },
 
   STATE_ATTRIBUTE_DEFAULT: []Transition{
-    {STATE_ATTRIBUTES_NEXT, TOKEN_COMA, dummy},
+    {STATE_ATTRIBUTES_NEXT, TOKEN_COMA, passthrough},
     {STATE_ATTRIBUTES_END, TOKEN_PAR_CLOSE, createLevelAttributesEnd},
   },
 
@@ -77,7 +77,7 @@ var FSM = map[State]([]Transition){
   },
 
   STATE_ATTRIBUTES_END: []Transition{
-    {STATE_LEVELS_NEXT, TOKEN_COMA, dummy},
+    {STATE_LEVELS_NEXT, TOKEN_COMA, passthrough},
     {STATE_LEVELS_END, TOKEN_PAR_CLOSE, createDimensionLevelsEnd},
   },
 
@@ -87,6 +87,6 @@ var FSM = map[State]([]Transition){
   },
 
   STATE_LEVELS_END: []Transition{
-    {STATE_STMT_START, TOKEN_SEMI, dummy},
+    {STATE_STMT_START, TOKEN_SEMI, passthrough},
   },
 }

@@ -4,7 +4,7 @@ import "fmt"
 
 type Callback func(Statement, *Token) (Statement, error)
 
-func dummy(stmt Statement, token *Token) (Statement, error) {
+func passthrough(stmt Statement, token *Token) (Statement, error) {
   return stmt, nil
 }
 
