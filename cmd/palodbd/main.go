@@ -69,10 +69,15 @@ func runParser(fileName string) {
   lexer := lang.NewLexer(getFile(fileName))
   parser := lang.NewParser(lexer)
 
-  err := parser.Parse()
+  stmts, err := parser.Parse()
   if err != nil {
     fmt.Println()
     panic(err)
+  }
+
+  fmt.Printf("Got %d statements\n", len(stmts))
+  for _, stmt := range stmts {
+    fmt.Println(stmt)
   }
 }
 
