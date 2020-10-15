@@ -2,6 +2,7 @@ package engine
 
 import (
   "fmt"
+  "strings"
 
   "github.com/leopoldhoudin/palodb/core/lang"
   "github.com/leopoldhoudin/palodb/core/engine/schema"
@@ -23,13 +24,31 @@ func NewEngine(config *Config) *Engine {
   return &Engine{config, schema}
 }
 
-func (this *Engine) Execute(stmt lang.Statement) error {
+func (this *Engine) ExecuteString(text string) error {
+  lexer := lang.NewLexer(strings.NewReader(text))
+  parser := lang.NewParser(lexer)
+
+  stmts, err := parser.Parse()
+  if err != nil {
+    return err
+  }
+
+  for _, stmt := range stmts {
+    if err := this.ExecuteStatement(stmt); err != nil {
+      return err
+    }
+  }
+
+  return nil
+}
+
+func (this *Engine) ExecuteStatement(stmt lang.Statement) error {
   switch typedStmt := stmt.(type) {
   case *lang.CreateDimension:
     return this.executeCreateDimension(typedStmt)
 
   default:
-    fmt.Println("Unknown type: %s", typedStmt)
+    fmt.Printf("Unknown type: %s\n", typedStmt)
     break
 
   }

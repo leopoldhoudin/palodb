@@ -63,7 +63,7 @@ var FSM = map[State]([]Transition){
   STATE_ATTRIBUTE_TYPE: []Transition{
     {STATE_ATTRIBUTE_DEFAULT, TOKEN_KW_DEFAULT, createAttributeSetDefault},
     {STATE_ATTRIBUTES_NEXT, TOKEN_COMA, passthrough},
-    {STATE_ATTRIBUTES_END, TOKEN_PAR_CLOSE, passthrough},
+    {STATE_ATTRIBUTES_END, TOKEN_PAR_CLOSE, createLevelAttributesEnd},
   },
 
   STATE_ATTRIBUTE_DEFAULT: []Transition{
