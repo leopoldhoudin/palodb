@@ -8,5 +8,5 @@ type SyntaxError struct {
 }
 
 func (this *SyntaxError) Error() string {
-  return fmt.Sprintf("(%d:%d): %s", this.pos.Line, this.pos.Column, this.msg)
+  return fmt.Sprintf("[SyntaxError@(%d:%d)]: %s", this.pos.Line, this.pos.Column, this.msg)
 }

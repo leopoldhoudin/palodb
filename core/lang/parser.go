@@ -37,16 +37,16 @@ func (this *Parser) Parse() ([]Statement, error) {
 }
 
 func (this *Parser) processToken(token *Token) error {
-  fmt.Printf("Check token %-10v from current state %-25v", token.Type, this.currentState)
+  // fmt.Printf("Check token %-10v from current state %-25v", token.Type, this.currentState)
 
   for _, trans := range FSM[this.currentState] {
     if trans.TokenType == token.Type {
-      fmt.Printf("; Found next state: %s\n", trans.NextState)
+      // fmt.Printf("; Found next state: %s\n", trans.NextState)
 
       // Found appropriate transition
       nextStmt, err := trans.Callback(this.currentStatement, token)
       if err != nil {
-        return nil
+        return err
       }
       this.currentStatement = nextStmt
 

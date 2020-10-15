@@ -151,7 +151,6 @@ func (this *Lexer) lexLiteral() (string, error) {
         return buffer.String(), nil
       }
 
-      this.currentPosition.Column++
       if isValididentifierPart(chr) {
         buffer.WriteRune(chr)
       } else {
