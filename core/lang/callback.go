@@ -56,6 +56,16 @@ func createFirstAttribute(stmt Statement, token *Token) (Statement, error) {
 func createNextAttribute(stmt Statement, token *Token) (Statement, error) {
   // fmt.Printf(">>> createNextAttribute(%s)\n", token.Literal)
   oth := stmt.(*CreateAttribute)
+
+  for _, tst := range oth.Lvl.Attributes {
+    if tst.Name == token.Literal {
+      return nil, &SyntaxError{
+        token.Position,
+        fmt.Sprintf("Redefinition of attribute '%s'", token.Literal),
+      }
+    }
+  }
+
   att := &CreateAttribute{oth.Lvl, token.Literal, "", false}
   oth.Lvl.Attributes = append(oth.Lvl.Attributes, att)
   return att, nil

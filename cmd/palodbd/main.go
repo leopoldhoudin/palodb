@@ -111,9 +111,9 @@ func main() {
 
   fileName := "test.palo"
 
-  // runFile(fileName)
-  // runLexer(fileName)
-  // runParser(fileName)
+  runFile(fileName)
+  runLexer(fileName)
+  runParser(fileName)
 
-  runExecute(fileName)
+  // runExecute(fileName)
 }
