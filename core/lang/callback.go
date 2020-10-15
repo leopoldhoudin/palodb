@@ -64,7 +64,7 @@ func createNextAttribute(stmt Statement, token *Token) (Statement, error) {
 func createAttributeSetType(stmt Statement, token *Token) (Statement, error) {
   // fmt.Printf(">>> createAttributeSetType(%s)\n", token.Literal)
   att := stmt.(*CreateAttribute)
-  att.Type = token.Literal
+  att.Dtype = token.Literal
   return att, nil
 }
 

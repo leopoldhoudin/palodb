@@ -22,7 +22,7 @@ type CreateLevel struct {
 type CreateAttribute struct {
   Lvl *CreateLevel
   Name string
-  Type string
+  Dtype string
   Default bool
 }
 
@@ -58,5 +58,5 @@ func (this *CreateAttribute) String() string {
     def = " DEFAULT"
   }
 
-  return fmt.Sprintf("CreateAttribute(%s, %s%s)", this.Name, this.Type, def)
+  return fmt.Sprintf("CreateAttribute(%s, %s%s)", this.Name, this.Dtype, def)
 }

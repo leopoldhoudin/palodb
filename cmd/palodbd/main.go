@@ -7,6 +7,7 @@ import (
   "bufio"
 
 	"github.com/leopoldhoudin/palodb/core/lang"
+	"github.com/leopoldhoudin/palodb/core/engine"
 )
 
 func getFile(fileName string) io.Reader {
@@ -81,12 +82,38 @@ func runParser(fileName string) {
   }
 }
 
+func runExecute(fileName string) {
+  fmt.Println("===== EXEC ====================================================")
+
+  // lexer := lang.NewLexer(getFile(fileName))
+  // parser := lang.NewParser(lexer)
+	//
+  // stmts, err := parser.Parse()
+  // if err != nil {
+  //   fmt.Println()
+  //   panic(err)
+  // }
+
+  config := engine.NewConfig()
+  config.DataPath = "data/"
+
+	engine.NewEngine(config)
+
+  // for _, stmt := range stmts {
+  //   if err := eng.Execute(stmt); err != nil {
+	// 		panic(err)
+	// 	}
+  // }
+}
+
 func main() {
 	fmt.Println("palodb -", Version)
 
   fileName := "test.palo"
 
-  runFile(fileName)
-  runLexer(fileName)
-  runParser(fileName)
+  // runFile(fileName)
+  // runLexer(fileName)
+  // runParser(fileName)
+
+  runExecute(fileName)
 }
